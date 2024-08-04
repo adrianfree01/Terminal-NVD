@@ -91,6 +91,47 @@ void parseJson(const char* jsonResponse)
 
 int main(void)
 {
+	int input;
+	printf("What parameters would you like to add to the request? (Enter 0 to Query)\n
+			1: No Parameters\n
+			2: CPE Name\n
+			3: CVE ID\n
+			4: CVE Tag\n
+			5: CVSS v2 Metrics\n
+			6: CVSS v2 Severity\n
+			7: CVSS v3 Metrics\n
+			8: CVSS v3 Security\n
+			9: CVSS v4 Metrics\n
+			10: CVSS v4 Severity\n
+			11: CWE ID\n
+			12: Contains Technical Alert from US-CERT\n
+			13: Contains Vulnerability Note from CERT/C\n
+			14: Appears in Known Exploited Vulnerabilities (KEV) Catalog\n
+			15: Contains info from MITRE's Open Vulnerability and Assessment Language (OVAL)\n
+			16: Is Vulnerable\n
+			17: Search by Keyword Exact Match\n
+			18: Search by Keyword\n
+			19: Last Modified Date Range\n
+			20: Not Rejected\n
+			21: Published Date Range\n
+			22: Number of Results\n
+			23: Start Index\n
+			24: Source Identifier\n
+			25: CPE Version Start\n
+			26: CPE Version End\n
+			27: CPE Match");
+	scanf("%d", &input);
+	
+	switch (input) 
+	{
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+
+
 	const char* url = NVD_URL;
 	char* response = makeRequest(url);
 
