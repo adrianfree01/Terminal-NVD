@@ -1,9 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <curl/curl.h>
-#include <cjson/cJSON.h>
-
+#include "params.h"
 /*
  * Intro to National Vulnerability Database (NVD) Project
  * Professor: Dr. Saqib Hakak
@@ -92,47 +87,22 @@ void parseJson(const char* jsonResponse)
 int main(void)
 {
 	int input;
-	printf("What parameters would you like to add to the request? (Enter 0 to Query)\n
-			1: No Parameters\n
-			2: CPE Name\n
-			3: CVE ID\n
-			4: CVE Tag\n
-			5: CVSS v2 Metrics\n
-			6: CVSS v2 Severity\n
-			7: CVSS v3 Metrics\n
-			8: CVSS v3 Security\n
-			9: CVSS v4 Metrics\n
-			10: CVSS v4 Severity\n
-			11: CWE ID\n
-			12: Contains Technical Alert from US-CERT\n
-			13: Contains Vulnerability Note from CERT/C\n
-			14: Appears in Known Exploited Vulnerabilities (KEV) Catalog\n
-			15: Contains info from MITRE's Open Vulnerability and Assessment Language (OVAL)\n
-			16: Is Vulnerable\n
-			17: Search by Keyword Exact Match\n
-			18: Search by Keyword\n
-			19: Last Modified Date Range\n
-			20: Not Rejected\n
-			21: Published Date Range\n
-			22: Number of Results\n
-			23: Start Index\n
-			24: Source Identifier\n
-			25: CPE Version Start\n
-			26: CPE Version End\n
-			27: CPE Match");
-	scanf("%d", &input);
-	
-	switch (input) 
+	char* url = NVD_URL;
+	int count = 0;
+	while (input != 0)
 	{
-		case 1:
-			break;
-		case 2:
-			break;
-		case 3:
-			break;
 
-
-	const char* url = NVD_URL;
+		printf("What parameters would you like to add to the request? (Enter 0 to Query)\n1: CPE Name\n2: CVE ID\n3: CVE Tag\n4: CVSS v2 Metrics\n5: CVSS v2 Severity\n6: CVSS v3 Metrics\n7: CVSS v3 Security\n8: CVSS v4 Metrics\n9: CVSS v4 Severity\n10: CWE ID\n11: Contains Technical Alert from US-CERT\n12: Contains Vulnerability Note from CERT/C\n13: Appears in Known Exploited Vulnerabilities (KEV) Catalog\n14: Contains info from MITRE's Open Vulnerability and Assessment Language (OVAL)\n15: Is Vulnerable\n16: Search by Keyword Exact Match\n17: Search by Keyword\n18: Last Modified Date Range\n19: Not Rejected\n20: Published Date Range\n21: Number of Results\n22: Start Index\n23: Source Identifier\n24: CPE Version Start\n25: CPE Version End\n26: CPE Match\n");
+		scanf("%d", &input);
+		
+		if (count == 0 && input != 0)
+			strcat(url, "?");
+		else if (count > 0 && input != 0)
+			strcat(url, "&");
+		char* generateRequestOutput = generateRequest(input);
+		strcat(url, generateRequestOutput);
+		count++;
+	}
 	char* response = makeRequest(url);
 
 	if (response) 
