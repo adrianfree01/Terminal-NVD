@@ -86,21 +86,27 @@ void parseJson(const char* jsonResponse)
 
 int main(void)
 {
-	int input;
-	char* url = NVD_URL;
+	int input = -1;
+	char url[2048];
+	//char* url = NVD_URL;
+	strcpy(url, NVD_URL);
 	int count = 0;
 	while (input != 0)
 	{
-
 		printf("What parameters would you like to add to the request? (Enter 0 to Query)\n1: CPE Name\n2: CVE ID\n3: CVE Tag\n4: CVSS v2 Metrics\n5: CVSS v2 Severity\n6: CVSS v3 Metrics\n7: CVSS v3 Security\n8: CVSS v4 Metrics\n9: CVSS v4 Severity\n10: CWE ID\n11: Contains Technical Alert from US-CERT\n12: Contains Vulnerability Note from CERT/C\n13: Appears in Known Exploited Vulnerabilities (KEV) Catalog\n14: Contains info from MITRE's Open Vulnerability and Assessment Language (OVAL)\n15: Is Vulnerable\n16: Search by Keyword Exact Match\n17: Search by Keyword\n18: Last Modified Date Range\n19: Not Rejected\n20: Published Date Range\n21: Number of Results\n22: Start Index\n23: Source Identifier\n24: CPE Version Start\n25: CPE Version End\n26: CPE Match\n");
-		scanf("%d", &input);
 		
-		if (count == 0 && input != 0)
+		scanf(" %d", &input);
+		if (input == 0)
+			break;
+
+		if (count == 0)
 			strcat(url, "?");
-		else if (count > 0 && input != 0)
+		else
 			strcat(url, "&");
+
 		char* generateRequestOutput = generateRequest(input);
 		strcat(url, generateRequestOutput);
+		free(generateRequestOutput);
 		count++;
 	}
 	char* response = makeRequest(url);

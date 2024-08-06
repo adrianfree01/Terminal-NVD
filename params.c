@@ -30,82 +30,211 @@
 
 char* generateRequest(int input) 
 {
-	char* output;
-	switch(input) 
-	{
+	char* output = malloc(2048);
+	switch(input)
+	{ 
 		case 1: // CPE Name
-			output = "cpeName=cpe:2.3:";
-			printf("\nPart: ");
-			char* cpeNameInput;
-			scanf("%s", &cpeNameInput);
-			strcat(output, strcat(cpeNameInput, ":"));
+            		strcat(output, "cpeName=cpe:2.3:");
 
-			printf("\nVendor: ");
-			scanf("%s", &cpeNameInput);
-			strcat(output, strcat(cpeNameInput, ":"));
+            		char cpeNameInput[256]; // Allocate enough memory for inputs
 
-			printf("\nProduct: ");
-			scanf("%s", &cpeNameInput);
-			strcat(output, strcat(cpeNameInput, ":"));
+            		printf("\nPart (Required) either a (application) o (operating system) h (hardware): ");
+            		scanf("%255s", cpeNameInput);
+            		strcat(output, cpeNameInput);
+           		strcat(output, ":");
 
-			printf("\nVersion: ");
-			scanf("%s", &cpeNameInput);
-			strcat(output, strcat(cpeNameInput, ":"));
+            		printf("\nVendor (Required): ");
+            		scanf("%255s", cpeNameInput);
+            		strcat(output, cpeNameInput);
+            		strcat(output, ":");
 
-			printf("\nUpdate: ");
-			scanf("%s", &cpeNameInput);
-			strcat(output, strcat(cpeNameInput, ":"));
+            		printf("\nProduct (Required): ");
+            		scanf("%255s", cpeNameInput);
+            		strcat(output, cpeNameInput);
+            		strcat(output, ":");
 
-			printf("\nEdition: ");
-			scanf("%s", &cpeNameInput);
-			strcat(output, strcat(cpeNameInput, ":"));
+            		printf("\nVersion (Required): ");
+            		scanf("%255s", cpeNameInput);
+         		strcat(output, cpeNameInput);
+            		strcat(output, ":");
 
-			printf("\nLanguage: ");
-			scanf("%s", &cpeNameInput);
-			strcat(output, strcat(cpeNameInput, ":"));
+            		printf("\nUpdate: ");
+            		scanf("%255s", cpeNameInput);
+            		strcat(output, cpeNameInput);
+            		strcat(output, ":");
 
-			printf("\nSoftware Edition: ");
-			scanf("%s", &cpeNameInput);
-			strcat(output, strcat(cpeNameInput, ":"));
+            		printf("\nEdition: ");
+            		scanf("%255s", cpeNameInput);
+            		strcat(output, cpeNameInput);
+            		strcat(output, ":");
 
-			printf("\nTarget Software: ");
-			scanf("%s", &cpeNameInput);
-			strcat(output, strcat(cpeNameInput, ":"));
+            		printf("\nLanguage: ");
+            		scanf("%255s", cpeNameInput);
+            		strcat(output, cpeNameInput);
+            		strcat(output, ":");
 
-			printf("\nTarget Hardware: ");
-			scanf("%s", &cpeNameInput);
-			strcat(output, strcat(cpeNameInput, ":"));
+            		printf("\nSoftware Edition: ");
+            		scanf("%255s", cpeNameInput);
+            		strcat(output, cpeNameInput);
+            		strcat(output, ":");
 
-			printf("\nOther: ");
-			scanf("%s", &cpeNameInput);
-			strcat(output, cpeNameInput);		
-			break;
+            		printf("\nTarget Software: ");
+            		scanf("%255s", cpeNameInput);
+            		strcat(output, cpeNameInput);
+            		strcat(output, ":");
+
+            		printf("\nTarget Hardware: ");
+            		scanf("%255s", cpeNameInput);
+            		strcat(output, cpeNameInput);
+            		strcat(output, ":");
+
+            		printf("\nOther: ");
+            		scanf("%255s", cpeNameInput);
+            		strcat(output, cpeNameInput);        
+            		break;
+        	
+
 
 		case 2: // CVE ID
-
+			strcat(output, "cveId=");
+			printf("\nCVE ID: ");
+			char cveId[256];
+			scanf("%255s", cveId);
+			strcat(output, cveId);
 			break;
 
 		case 3: // CVE Tag
-
+			strcat(output, "cveTag=");
+			printf("\nCVE ID (disputed, unsupported-when-assigned, exclusively-hosted-service): ");
+			char cveTag[256];
+			scanf("%255s", cveTag);
+			strcat(output, cveTag);
 			break;	
 
 		case 4: // CVSS v2 Metrics
+			strcat(output, "cvssV2Metrics=AV:"
+			printf("\nAccess Vector (L, A, N): ");
+			char cvssMetrics[256];
+			scanf("%255s", cvssMetrics);
+			strcat(output, cvssMetrics);
+
+			strcat(output, "/AC:");
+			printf("\nAccess Complexity (H, M, L): ");
+			scanf("%255s", cvssMetrics);
+			strcat(output, cvssMetrics);
+	
+			strcat(output, "/AU:");
+			printf("\nAuthentication (M, S, N): ");
+			scanf("%255s", cvssMetrics);
+			strcat(output, cvssMetrics);
+
+
+			strcat(output, "/C:");
+			printf("\nConfidentiality Impact (N, P, C): ");
+			scanf("%255s", cvssMetrics);
+			strcat(output, cvssMetrics);
+
+
+			strcat(output, "/I:");
+			printf("\nIntegrity Impact (N, P, C): ");
+			scanf("%255s", cvssMetrics);
+			strcat(output, cvssMetrics);
+
+
+			strcat(output, "/A:");
+			printf("\nAvailability Impact (N, P, C): ");
+			scanf("%255s", cvssMetrics);
+			strcat(output, cvssMetrics);
 
 			break;
 
 		case 5: // CVSS v2 Severity
-
+			strcat(output, "cvssV2Severity=");
+			printf("\nCVSS V2 Severity (LOW, MEDIUM, HIGH): ");
+			char cvssSeverity[256];
+			scanf("%255s", cvssSeverity);
+			strcat(output, cvssSeverity);
 			break;
 
 		case 6: // CVSS v3 Metrics
+			strcat(output, "cvssV3Metrics=AV:"
+			printf("\nAccess Vector (L, A, N, P): ");
+			char cvssMetrics[256];
+			scanf("%255s", cvssMetrics);
+			strcat(output, cvssMetrics);
+
+			strcat(output, "/AC:");
+			printf("\nAccess Complexity (H, L): ");
+			scanf("%255s", cvssMetrics);
+			strcat(output, cvssMetrics);
+	
+			strcat(output, "/PR:");
+			printf("\nPrivileges Required (N, L, H): ");
+			scanf("%255s", cvssMetrics);
+			strcat(output, cvssMetrics);
+
+			strcat(output, "/UI:");
+			printf("\nUser Interaction (N, R): ");
+			scanf("%255s", cvssMetrics);
+			strcat(output, cvssMetrics);
+
+			strcat(output, "/S:");
+			printf("\nScope (U, C): ");
+			scanf("%255s", cvssMetrics);
+			strcat(output, cvssMetrics);
+
+			strcat(output, "/C:");
+			printf("\nConfidentiality Impact (N, P, C): ");
+			scanf("%255s", cvssMetrics);
+			strcat(output, cvssMetrics);
+
+			strcat(output, "/I:");
+			printf("\nIntegrity Impact (N, P, C): ");
+			scanf("%255s", cvssMetrics);
+			strcat(output, cvssMetrics);
+
+			strcat(output, "/A:");
+			printf("\nAvailability Impact (N, P, C): ");
+			scanf("%255s", cvssMetrics);
+			strcat(output, cvssMetrics);
 
 			break;
 		case 7: // CVSS v3 Severity
-
+			strcat(output, "cvssV3Severity=");
+			printf("\nCVSS V3 Severity (LOW, MEDIUM, HIGH, CRITICAL): ");
+			char cvssSeverity[256];
+			scanf("%255s", cvssSeverity);
+			strcat(output, cvssSeverity);
 			break;
 
 		case 8: // CVSS v4 Metrics
+			strcat(output, "cvssV4Metrics=AV:"
+			printf("\nAccess Vector (L, A, N, P): ");
+			char cvssMetrics[256];
+			scanf("%255s", cvssMetrics);
+			strcat(output, cvssMetrics);
 
+			strcat(output, "/AC:");
+			printf("\nAccess Complexity (H, L): ");
+			scanf("%255s", cvssMetrics);
+			strcat(output, cvssMetrics);
+	
+			strcat(output, "/AT:");
+			printf("\nAttack Requirements (N, P): ");
+			scanf("%255s", cvssMetrics);
+			strcat(output, cvssMetrics);
+
+			strcat(output, "/PR:");
+			printf("\nPrivileges Required (N, L, H): ");
+			scanf("%255s", cvssMetrics);
+			strcat(output, cvssMetrics);
+
+			strcat(output, "/UI:");
+			printf("\nUser Interaction (N, R): ");
+			scanf("%255s", cvssMetrics);
+			strcat(output, cvssMetrics);
+
+			//STOPPED HERE
 			break;
 
 		case 9 : // CVSS v4 Severity
